@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Rates from './rates';
 import Reply from './reply';
 import ReplyForm from './replyform';
-import { NONAME } from 'dns';
+
 
 export default class Li extends Component{
 

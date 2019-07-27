@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import Ul from './ul';
+import Footer from './footer';
+import Header from './header';
 
 
 const Main = ({match}) => {
       return (
-        // <p>param: {match.params.member_num}</p>
-        <Ul member_num={match.params.member_num}></Ul>
+        <div>
+            <Header member_num={match.params.member_num}></Header>
+            <Ul member_num={match.params.member_num}></Ul>
+            <Footer></Footer>
+        </div>
      );
 };
 
