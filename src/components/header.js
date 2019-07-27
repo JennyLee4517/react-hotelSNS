@@ -25,7 +25,7 @@ export default class Footer extends Component{
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>                        
                 </button>
-                <a className="navbar-brand my-navbar-brand" href="home.do">
+                <a className="navbar-brand my-navbar-brand" href="http://15.164.144.128:8080/HotelProject/">
                     <img  width="70px" src={Logo} alt="logo"></img>
                 </a>
                 </div>
