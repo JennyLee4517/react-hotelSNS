@@ -460,7 +460,7 @@ export default class Li extends Component{
                                         }
                                         
                                         {/* 댓글 목록 내부에 위치한 댓글 작성창  */}
-                                        <div className="review_reply_writeform_div_inList" >
+                                        {/* <div className="review_reply_writeform_div_inList" >
                                         <ReplyForm member_num={this.props.member_num}
                                         review_num={this.props.row.review_num}
                                         insertReply={this.props.insertReply}
@@ -470,7 +470,7 @@ export default class Li extends Component{
                                         hideWriteForm = {this.hideWriteForm}
                                         scrollToLastReply = {this.scrollToLastReply}
                                         ></ReplyForm>   
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                 {/* </div> */}
