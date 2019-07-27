@@ -136,11 +136,12 @@ export default class ReplyForm extends Component{
 
         let user_pic = "http://15.164.144.128:8080/HotelProject/save/member_pic/" + this.state.mbdto.member_pic;
         let placeholder = this.state.mbdto.id + "님으로 댓글 달기...";
+        let loginUrl = "http://15.164.144.128:8080/HotelProject/login.do?url=http://firsthotel-review.herokuapp.com/" + this.props.member_num;
 
         if(this.props.member_num == 0){
             return(
                 <div className="writeform_div">
-                    <a href="http://15.164.144.128:8080/HotelProject/login.do?url=reviewlist.do">
+                    <a href={loginUrl}>
                         <div className="writeform_nologin" >
                         댓글을 작성하시려면 먼저 <span>로그인</span>을 해주세요.
                         {/* 로그인 창으로 유도 및 url 값 넘겨주기!!  */}
