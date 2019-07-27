@@ -12,10 +12,9 @@ const Root = () => {
 
     
  return (
+    <BrowserRouter>
     <App/>
-    // <BrowserRouter>
-    // <App/>
-    // </BrowserRouter>
+    </BrowserRouter>
 
 
     // <Provider store={store} basename={process.env.PUBLIC_URL}> 

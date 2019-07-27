@@ -7,8 +7,8 @@ import {Route} from 'react-router-dom'
 function App() {
   return (
     <div className="App">
-      this is my app!
-      {/* <Route path="/:member_num" component={Main}/> */}
+      
+      <Route path="/:member_num" component={Main}/>
       
       {/* <Main></Main> */}
     </div>
