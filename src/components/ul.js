@@ -20,6 +20,12 @@ export default class Main extends Component{
             // hideText: "모두 닫기",
             callChildIdx : null,
             currentPage : 1,
+            showStyle : {
+                display: 'block',
+            },
+            hideStyle : {
+                display : 'none',
+            }
         }
         this.list = this.list.bind(this);
         this.updateLike = this.updateLike.bind(this);
@@ -32,6 +38,7 @@ export default class Main extends Component{
         this._infiniteScroll = this._infiniteScroll.bind(this);
         this.deleteData = this.deleteData.bind(this);
         this.deleteReply = this.deleteReply.bind(this);
+        this.closeAllReplyForm = this.closeAllReplyForm.bind(this);
 
     }
 
@@ -264,6 +271,18 @@ export default class Main extends Component{
    
     }
 
+
+    //모든 댓글작성창을 닫는 함수
+    closeAllReplyForm = (idx) => {
+        //인자로 받은 idx가 누구인지 받아서 state에 저장한다.
+        this.setState({
+            callChildIdx : idx,
+        });
+        console.log("close all reply form called by ", idx);
+
+
+    }
+
     //댓글보기 버튼을 눌렀을때 스크롤 위치를 댓글 최 상단으로 옮겨주는 함수
     moveToReplyListStart = (idx, callback) => {
             // //시작위치 
@@ -303,6 +322,11 @@ export default class Main extends Component{
             // 이거 모바일에선  스무스하게 안됨 ㅠ 
             });
     }
+
+
+    
+
+
 
     //댓글 작성하기 submit 했을때 최신 댓글 위치가 화면의 맨 하단으로 가게 이동시키는 함수 
     scrollToLastReply = (idx, callback) => {
@@ -360,6 +384,8 @@ export default class Main extends Component{
                                 deleteData = {this.deleteData}
                                 deleteReply = {this.deleteReply}
                                 // showText = {this.state.hideText}
+                                closeAllReplyForm = {this.closeAllReplyForm}
+                                writeformStyle = {this.state.showStyle}
                                 list={this.list}></Li>
                             }else{ //만약 idx가 우리가 받은 idx와 다르다면...listStyle은 none
                                 return <Li idx={idx} row={row} key={idx} 
@@ -375,6 +401,8 @@ export default class Main extends Component{
                                 deleteData = {this.deleteData}
                                 deleteReply = {this.deleteReply}
                                 // showText = {this.state.showText}
+                                closeAllReplyForm = {this.closeAllReplyForm}
+                                writeformStyle = {this.state.hideStyle}
                                 list={this.list}></Li>
                             }
 

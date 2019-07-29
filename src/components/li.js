@@ -33,9 +33,7 @@ export default class Li extends Component{
             },
             // showOrHide : this.props.showText,
             showOrHide : "모두 보기",
-            writeformStyle : {
-                display : 'none',              
-            },
+            writeformStyle : this.props.writeformStyle,
             lastReplyPosition : 0,
             member_num : props.member_num,
             moreBtnStyle : {
@@ -218,15 +216,19 @@ export default class Li extends Component{
 
     //댓글 작성창을 보이게 하는 함수
     showWriteForm = () => {
-        this.setState({
-            writeformStyle : {
-                display: 'block',
-                zIndex : 10,
-            },
-            // autoFocus : {
-            //     autoFocus : 'true'
-            // } //이거 왜 안될까.... 슬프다..
-        })
+
+        //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
+        this.props.closeAllReplyForm(this.props.idx);
+
+        // this.setState({
+        //     writeformStyle : {
+        //         display: 'block',
+        //         zIndex : 10,
+        //     },
+        //     // autoFocus : {
+        //     //     autoFocus : 'true'
+        //     // } //이거 왜 안될까.... 슬프다..
+        // })
 
         this.showReplyList();
 
@@ -416,6 +418,7 @@ export default class Li extends Component{
                                         //    autoFocus = {this.state.autoFocus}
                                         hideWriteForm = {this.hideWriteForm}
                                         scrollToLastReply = {this.scrollToLastReply}
+                                        
                                         ></ReplyForm>   
                             </div>
 

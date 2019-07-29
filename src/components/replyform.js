@@ -109,7 +109,8 @@ export default class ReplyForm extends Component{
         this.props.hideWriteForm();
 
         //스크롤 위치를 최신 댓글 위치로 변경 시켜봅시다.(부모가 가진 함수에요)
-        this.props.scrollToLastReply();
+        // this.props.scrollToLastReply();
+        //이거 너무 변수가 많아서 일단 보류...
         
     }
 
@@ -140,7 +141,7 @@ export default class ReplyForm extends Component{
 
         if(this.props.member_num == 0){
             return(
-                <div className="writeform_div">
+                <div className="writeform_div" style={this.props.writeFormStyle}>
                     <a href={loginUrl}>
                         <div className="writeform_nologin" >
                         댓글을 작성하시려면 먼저 <span>로그인</span>을 해주세요.
@@ -151,7 +152,7 @@ export default class ReplyForm extends Component{
             )
         }else{
             return(
-                <div className="review_reply_list_div writeform_div">
+                <div className="review_reply_list_div writeform_div" style={this.props.writeFormStyle}>
                     <div style={{float:'left'}}><img className="img-circle" src={user_pic} alt="member_pic"></img></div>
                     <div className="reply_comments">
                         <form onSubmit={this.insertReply}>
