@@ -62,6 +62,7 @@ export default class Li extends Component{
         this.scrollToLastReply = this.scrollToLastReply.bind(this);
         this.deleteData = this.deleteData.bind(this);
         this.showHeart = this.showHeart.bind(this);
+        this.closeAllReplyForm = this.closeAllReplyForm.bind(this);
         
     }
 
@@ -220,7 +221,7 @@ export default class Li extends Component{
         //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
         // this.props.closeAllReplyForm(this.props.idx);
         //콜백으로 처리한다. 
-        callback(this.props.idx);
+        callback();
         console.log("callback done");
 
         this.setState({
@@ -237,8 +238,8 @@ export default class Li extends Component{
     }
 
     //부모로부터 받은 함수인 closeAllreplyform을 콜백으로 처리하기 위한...
-    closeAllReplyForm = (idx) => {
-        this.props.closeAllReplyForm(idx);
+    closeAllReplyForm = () => {
+        this.props.closeAllReplyForm(this.props.idx);
     }
 
     //댓글 작성창을 숨기게 하는 함수
