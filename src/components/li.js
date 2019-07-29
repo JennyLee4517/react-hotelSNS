@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Rates from './rates';
 import Reply from './reply';
 import ReplyForm from './replyform';
-
+import { NONAME } from 'dns';
 
 export default class Li extends Component{
 
@@ -34,7 +34,7 @@ export default class Li extends Component{
             // showOrHide : this.props.showText,
             showOrHide : "모두 보기",
             writeformStyle : {
-                display : 'none',
+                display : 'none',              
             },
             lastReplyPosition : 0,
             member_num : props.member_num,
@@ -49,20 +49,21 @@ export default class Li extends Component{
 
 
         };
-        this.changeShowOrHide = this.changeShowOrHide.bind(this);
+
         this.clickHeart = this.clickHeart.bind(this);
-        this.deleteData = this.deleteData.bind(this);
-        this.hideWriteForm = this.hideWriteForm.bind(this);
-        this.lastPositionConsolelog = this.lastPositionConsolelog.bind(this);
-        this.openDetailDiv = this.openDetailDiv.bind(this);
-        // this.scrollToLastReply = this.scrollToLastReply.bind(this);
-        this.showHeart = this.showHeart.bind(this);
-        this.showReplyList = this.showReplyList.bind(this);
-        this.showWriteForm = this.showWriteForm.bind(this);
-        this.toggleReplyList = this.toggleReplyList.bind(this);
         this.unclickHeart = this.unclickHeart.bind(this);
-        // this.closeAllReplyList = this.closeAllReplyList.bind(this);
-        // this.closeAllReplyForm = this.closeAllReplyForm.bind(this);
+        this.openDetailDiv = this.openDetailDiv.bind(this);
+        this.toggleReplyList = this.toggleReplyList.bind(this);
+        this.changeShowOrHide = this.changeShowOrHide.bind(this);
+        this.showWriteForm = this.showWriteForm.bind(this);
+        this.hideWriteForm = this.hideWriteForm.bind(this);
+        this.scrollToLastReply = this.scrollToLastReply.bind(this);
+        this.lastPositionConsolelog = this.lastPositionConsolelog.bind(this);
+        this.hideWriteForm = this.hideWriteForm.bind(this);
+        this.closeAllReplyList = this.closeAllReplyList.bind(this);
+        this.scrollToLastReply = this.scrollToLastReply.bind(this);
+        this.deleteData = this.deleteData.bind(this);
+        this.showHeart = this.showHeart.bind(this);
         
     }
 
@@ -177,11 +178,11 @@ export default class Li extends Component{
 
     
     //모든 댓글 리스트를 닫는 함수
-    // closeAllReplyList = (idx) => {
-    //     //호출하는 자식의 인덱스를 부모에게 보냄 
-    //     this.props.closeAllReplyList(idx);
+    closeAllReplyList = (idx) => {
+        //호출하는 자식의 인덱스를 부모에게 보냄 
+        this.props.closeAllReplyList(idx);
         
-    // }
+    }
 
     //마지막 댓글위치를 출력하는 함수 
     lastPositionConsolelog = () => {      
@@ -191,7 +192,7 @@ export default class Li extends Component{
     
     //댓글 리스트를 보여주는 함수 
     showReplyList = () => {
-        // this.closeAllReplyList(this.props.idx);
+        this.closeAllReplyList(this.props.idx);
         this.setState({
                     replyListStyle : {
                         display : 'block'
@@ -217,31 +218,19 @@ export default class Li extends Component{
 
     //댓글 작성창을 보이게 하는 함수
     showWriteForm = () => {
-        // console.log("showWriteForm call");
-        //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
-        // this.props.closeAllReplyForm(this.props.idx);
-        //콜백으로 처리한다. 
-        // callback();
-        // console.log("callback done");
-        //포기하겠다..
-
-
         this.setState({
             writeformStyle : {
                 display: 'block',
                 zIndex : 10,
             },
-         
+            // autoFocus : {
+            //     autoFocus : 'true'
+            // } //이거 왜 안될까.... 슬프다..
         })
 
         this.showReplyList();
 
     }
-
-    //부모로부터 받은 함수인 closeAllreplyform을 콜백으로 처리하기 위한...
-    // closeAllReplyForm = () => {
-    //     this.props.closeAllReplyForm(this.props.idx);
-    // }
 
     //댓글 작성창을 숨기게 하는 함수
     hideWriteForm = () => {
@@ -254,9 +243,9 @@ export default class Li extends Component{
 
     //최신댓글 위치로 스크롤을 이동시키는 함수 
     //혹시 이걸 부모로 옮겨야 하나...?
-    // scrollToLastReply = () => {
-    //     this.props.scrollToLastReply(this.props.idx, this.props.windowScroll);
-    // }
+    scrollToLastReply = () => {
+        this.props.scrollToLastReply(this.props.idx, this.props.windowScroll);
+    }
 
     // //자식(reply)로 부터 lastReplyPosition의 값을 받는 함수
     // getLastReplyPosition = (e) => {
@@ -410,7 +399,7 @@ export default class Li extends Component{
                                     <i className="fas fa-heart" style={{color:'orangered'}} onClick={this.unclickHeart}></i>
                                 </span>
                                 {/* 댓글쓰기 버튼 */}
-                                <span><i className="far fa-comment" onClick={this.showWriteForm()}></i></span>
+                                <span><i className="far fa-comment" onClick={this.showWriteForm}></i></span>
                                 {/* 수정, 삭제 버튼 */}
                                 <span style={this.state.moreBtnStyle} className="review_func_more" onClick={this.deleteData} ><i className="fas fa-times"></i></span>
                                 <div style={{clear: 'both'}}></div>
@@ -426,8 +415,7 @@ export default class Li extends Component{
                                         showReplyList={this.showReplyList}
                                         //    autoFocus = {this.state.autoFocus}
                                         hideWriteForm = {this.hideWriteForm}
-                                        // scrollToLastReply = {this.scrollToLastReply}
-                                        
+                                        scrollToLastReply = {this.scrollToLastReply}
                                         ></ReplyForm>   
                             </div>
 
@@ -454,7 +442,7 @@ export default class Li extends Component{
                                     <span>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div> */}
                                 <div >
-                                    <span className="a_reply" onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
+                                    <a className="a_reply" href={"#"+startReplyPositionId} onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</a>
                                 </div>
 
                                 {/* <div style={this.props.listStyle} ref={replyListId}> */}
@@ -471,8 +459,8 @@ export default class Li extends Component{
                                             )
                                         }
                                         
-                                        {/* 댓글 목록 내부에 위치한 댓글 작성창 => 그냥 없애기로 결정함   */}
-                                        {/* <div className="review_reply_writeform_div_inList" >
+                                        {/* 댓글 목록 내부에 위치한 댓글 작성창  */}
+                                        <div className="review_reply_writeform_div_inList" >
                                         <ReplyForm member_num={this.props.member_num}
                                         review_num={this.props.row.review_num}
                                         insertReply={this.props.insertReply}
@@ -482,7 +470,7 @@ export default class Li extends Component{
                                         hideWriteForm = {this.hideWriteForm}
                                         scrollToLastReply = {this.scrollToLastReply}
                                         ></ReplyForm>   
-                                        </div> */}
+                                        </div>
 
                                     </div>
                                 {/* </div> */}

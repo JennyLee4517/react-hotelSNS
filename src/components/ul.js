@@ -20,23 +20,18 @@ export default class Main extends Component{
             // hideText: "모두 닫기",
             callChildIdx : null,
             currentPage : 1,
-            
         }
-        this._infiniteScroll = this._infiniteScroll.bind(this);
-            // this.closeAllReplyList = this.closeAllReplyList.bind(this);
-        this.deleteData = this.deleteData.bind(this);
-        this.deleteReply = this.deleteReply.bind(this);
-        this.insertReply = this.insertReply.bind(this);
         this.list = this.list.bind(this);
-        this.moveToReplyListStart = this.moveToReplyListStart.bind(this);
-        // this.scrollToLastReply = this.scrollToLastReply.bind(this);
         this.updateLike = this.updateLike.bind(this);
         this.updateUnlike = this.updateUnlike.bind(this);
-        // this.windowScroll = this.windowScroll.bind(this);
-        
-        
-       
-        // this.closeAllReplyForm = this.closeAllReplyForm.bind(this);
+        this.insertReply = this.insertReply.bind(this);
+        this.closeAllReplyList = this.closeAllReplyList.bind(this);
+        this.moveToReplyListStart = this.moveToReplyListStart.bind(this);
+        this.windowScroll = this.windowScroll.bind(this);
+        this.scrollToLastReply = this.scrollToLastReply.bind(this);
+        this._infiniteScroll = this._infiniteScroll.bind(this);
+        this.deleteData = this.deleteData.bind(this);
+        this.deleteReply = this.deleteReply.bind(this);
 
     }
 
@@ -261,27 +256,13 @@ export default class Main extends Component{
 
 
     //모든 댓글리스트를 닫는 함수
-    // closeAllReplyList = (idx) => {
-    //     //인자로 받은 idx가 누구인지 받아서 state에 저장한다.
-    //     this.setState({
-    //         callChildIdx : idx,
-    //     })
+    closeAllReplyList = (idx) => {
+        //인자로 받은 idx가 누구인지 받아서 state에 저장한다.
+        this.setState({
+            callChildIdx : idx,
+        })
    
-    // }
-
-
-    //모든 댓글작성창을 닫는 함수
-    // closeAllReplyForm = (idx) => {
-    //     //인자로 받은 idx가 누구인지 받아서 state에 저장한다.
-    //     this.setState({
-    //         writeformStyle : {
-    //             display: 'none',
-    //         }
-    //     });
-    //     console.log("close all reply form called by ", idx);
-
-
-    // }
+    }
 
     //댓글보기 버튼을 눌렀을때 스크롤 위치를 댓글 최 상단으로 옮겨주는 함수
     moveToReplyListStart = (idx, callback) => {
@@ -314,37 +295,35 @@ export default class Main extends Component{
 
     }
 
-    // windowScroll = (startReplyPosition) =>{
-    //     window.scroll({
-    //         top: startReplyPosition,
-    //         left: 0,
-    //         behavior: 'smooth'
-    //         // 이거 모바일에선  스무스하게 안됨 ㅠ 
-    //         });
-    // }
-
+    windowScroll = (startReplyPosition) =>{
+        window.scroll({
+            top: startReplyPosition,
+            left: 0,
+            behavior: 'smooth'
+            });
+    }
 
     //댓글 작성하기 submit 했을때 최신 댓글 위치가 화면의 맨 하단으로 가게 이동시키는 함수 
-    // scrollToLastReply = (idx, callback) => {
+    scrollToLastReply = (idx, callback) => {
 
-    //     let accHeight = 0;
+        let accHeight = 0;
 
-    //     for(let i=0 ; i<idx ; i++){
-    //         accHeight += document.getElementById("lastReplyPosition"+idx).offsetTop + 20;
-    //     }
-    //     console.log("accHeight" , accHeight);
+        for(let i=0 ; i<idx ; i++){
+            accHeight += document.getElementById("lastReplyPosition"+idx).offsetTop + 20;
+        }
+        console.log("accHeight" , accHeight);
 
-    //     let lastReplyPosition = document.getElementById("lastReplyPosition"+idx).offsetTop;
-    //     let clientHeight = document.documentElement.clientHeight;
+        let lastReplyPosition = document.getElementById("lastReplyPosition"+idx).offsetTop;
+        let clientHeight = document.documentElement.clientHeight;
 
-    //     lastReplyPosition += accHeight - clientHeight;
+        lastReplyPosition += accHeight - clientHeight;
 
-    //     // //댓글 마지막 위치 확인용
-    //     console.log("id : " , ("lastReplyPosition"+idx) ,"|| acc Height : " , lastReplyPosition);
+        // //댓글 마지막 위치 확인용
+        console.log("id : " , ("lastReplyPosition"+idx) ,"|| acc Height : " , lastReplyPosition);
 
-    //     //위 기능을 콜백으로 처리해보자
-    //     callback(lastReplyPosition);
-    // }
+        //위 기능을 콜백으로 처리해보자
+        callback(lastReplyPosition);
+    }
 
 
      componentWillMount(){
@@ -361,63 +340,42 @@ export default class Main extends Component{
     //render함수 
     render(){
         return(
-            <div style={{marginTop:'-20px'}}>
+            <div>
                 <ul>
                     {
                         this.state.list.map( (row,idx) => {
-                            
-                            return <Li idx={idx} row={row} key={idx} 
+
+                            if(idx===this.state.callChildIdx){ //만약 idx 가 우리가 받은 idx와 같다면...listStyle은 block
+                                return <Li idx={idx} row={row} key={idx} 
                                 updateLike={this.updateLike} 
                                 updateUnlike={this.updateUnlike} 
                                 member_num={this.props.member_num}
                                 insertReply={this.insertReply}
-                                // closeAllReplyList = {this.closeAllReplyList}
+                                closeAllReplyList = {this.closeAllReplyList}
                                 listStyle= {this.state.showListStyle}
                                 moveToReplyListStart = {this.moveToReplyListStart}
-                                // windowScroll = {this.windowScroll}
-                                // scrollToLastReply = {this.scrollToLastReply}
+                                windowScroll = {this.windowScroll}
+                                scrollToLastReply = {this.scrollToLastReply}
                                 deleteData = {this.deleteData}
                                 deleteReply = {this.deleteReply}
                                 // showText = {this.state.hideText}
-                                // closeAllReplyForm = {this.closeAllReplyForm}
-                                // writeformStyle = {this.state.writeformStyle}
                                 list={this.list}></Li>
-
-                            // if(idx===this.state.callChildIdx){ //만약 idx 가 우리가 받은 idx와 같다면...listStyle은 block
-                            //     return <Li idx={idx} row={row} key={idx} 
-                            //     updateLike={this.updateLike} 
-                            //     updateUnlike={this.updateUnlike} 
-                            //     member_num={this.props.member_num}
-                            //     insertReply={this.insertReply}
-                            //     // closeAllReplyList = {this.closeAllReplyList}
-                            //     listStyle= {this.state.showListStyle}
-                            //     moveToReplyListStart = {this.moveToReplyListStart}
-                            //     windowScroll = {this.windowScroll}
-                            //     scrollToLastReply = {this.scrollToLastReply}
-                            //     deleteData = {this.deleteData}
-                            //     deleteReply = {this.deleteReply}
-                            //     // showText = {this.state.hideText}
-                            //     // closeAllReplyForm = {this.closeAllReplyForm}
-                            //     // writeformStyle = {this.state.writeformStyle}
-                            //     list={this.list}></Li>
-                            // }else{ //만약 idx가 우리가 받은 idx와 다르다면...listStyle은 none
-                            //     return <Li idx={idx} row={row} key={idx} 
-                            //     updateLike={this.updateLike} 
-                            //     updateUnlike={this.updateUnlike} 
-                            //     member_num={this.props.member_num}
-                            //     insertReply={this.insertReply}
-                            //     // closeAllReplyList = {this.closeAllReplyList}
-                            //     listStyle= {this.state.listStyle}
-                            //     moveToReplyListStart = {this.moveToReplyListStart}
-                            //     windowScroll = {this.windowScroll}
-                            //     scrollToLastReply = {this.scrollToLastReply}
-                            //     deleteData = {this.deleteData}
-                            //     deleteReply = {this.deleteReply}
-                            //     // showText = {this.state.showText}
-                            //     // closeAllReplyForm = {this.closeAllReplyForm}
-                            //     // writeformStyle = {this.state.writeformStyle}
-                            //     list={this.list}></Li>
-                            // }
+                            }else{ //만약 idx가 우리가 받은 idx와 다르다면...listStyle은 none
+                                return <Li idx={idx} row={row} key={idx} 
+                                updateLike={this.updateLike} 
+                                updateUnlike={this.updateUnlike} 
+                                member_num={this.props.member_num}
+                                insertReply={this.insertReply}
+                                closeAllReplyList = {this.closeAllReplyList}
+                                listStyle= {this.state.listStyle}
+                                moveToReplyListStart = {this.moveToReplyListStart}
+                                windowScroll = {this.windowScroll}
+                                scrollToLastReply = {this.scrollToLastReply}
+                                deleteData = {this.deleteData}
+                                deleteReply = {this.deleteReply}
+                                // showText = {this.state.showText}
+                                list={this.list}></Li>
+                            }
 
                           
                         }
