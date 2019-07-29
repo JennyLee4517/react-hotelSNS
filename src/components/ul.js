@@ -340,7 +340,7 @@ export default class Main extends Component{
     //render함수 
     render(){
         return(
-            <div>
+            <div style={{marginTop:'-20px'}}>
                 <ul>
                     {
                         this.state.list.map( (row,idx) => {

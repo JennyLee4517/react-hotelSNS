@@ -109,7 +109,7 @@ export default class ReplyForm extends Component{
         this.props.hideWriteForm();
 
         //스크롤 위치를 최신 댓글 위치로 변경 시켜봅시다.(부모가 가진 함수에요)
-        this.props.scrollToLastReply();
+        // this.props.scrollToLastReply();
         
     }
 

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Rates from './rates';
 import Reply from './reply';
 import ReplyForm from './replyform';
-import { NONAME } from 'dns';
 
 export default class Li extends Component{
 
@@ -442,7 +441,7 @@ export default class Li extends Component{
                                     <span>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div> */}
                                 <div >
-                                    <a className="a_reply" href={"#"+startReplyPositionId} onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</a>
+                                    <span className="a_reply" onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div>
 
                                 {/* <div style={this.props.listStyle} ref={replyListId}> */}
@@ -459,8 +458,8 @@ export default class Li extends Component{
                                             )
                                         }
                                         
-                                        {/* 댓글 목록 내부에 위치한 댓글 작성창  */}
-                                        <div className="review_reply_writeform_div_inList" >
+                                        {/* 댓글 목록 내부에 위치한 댓글 작성창 : 그냥 없애자... */}
+                                        {/* <div className="review_reply_writeform_div_inList" >
                                         <ReplyForm member_num={this.props.member_num}
                                         review_num={this.props.row.review_num}
                                         insertReply={this.props.insertReply}
@@ -470,7 +469,7 @@ export default class Li extends Component{
                                         hideWriteForm = {this.hideWriteForm}
                                         scrollToLastReply = {this.scrollToLastReply}
                                         ></ReplyForm>   
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                 {/* </div> */}
