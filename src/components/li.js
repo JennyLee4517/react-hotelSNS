@@ -442,7 +442,7 @@ export default class Li extends Component{
                                     <span>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div> */}
                                 <div >
-                                    <a className="a_reply" href={"#"+startReplyPositionId} onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</a>
+                                    <span className="a_reply" onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div>
 
                                 {/* <div style={this.props.listStyle} ref={replyListId}> */}

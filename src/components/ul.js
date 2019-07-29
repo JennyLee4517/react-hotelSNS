@@ -300,6 +300,7 @@ export default class Main extends Component{
             top: startReplyPosition,
             left: 0,
             behavior: 'smooth'
+            // 이거 모바일에선  스무스하게 안됨 ㅠ 
             });
     }
 
