@@ -216,7 +216,7 @@ export default class Li extends Component{
 
     //댓글 작성창을 보이게 하는 함수
     showWriteForm = () => {
-
+        console.log("showWriteForm call");
         //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
         this.props.closeAllReplyForm(this.props.idx);
 
