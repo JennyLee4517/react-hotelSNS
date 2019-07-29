@@ -220,15 +220,13 @@ export default class Li extends Component{
         //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
         this.props.closeAllReplyForm(this.props.idx);
 
-        // this.setState({
-        //     writeformStyle : {
-        //         display: 'block',
-        //         zIndex : 10,
-        //     },
-        //     // autoFocus : {
-        //     //     autoFocus : 'true'
-        //     // } //이거 왜 안될까.... 슬프다..
-        // })
+        this.setState({
+            writeformStyle : {
+                display: 'block',
+                zIndex : 10,
+            },
+         
+        })
 
         this.showReplyList();
 
