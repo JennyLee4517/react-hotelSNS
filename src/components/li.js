@@ -215,10 +215,13 @@ export default class Li extends Component{
 
 
     //댓글 작성창을 보이게 하는 함수
-    showWriteForm = () => {
+    showWriteForm = (callback) => {
         console.log("showWriteForm call");
         //부모에게 부탁해서 호출한 자식을 제외한 모든 자식의 writeform 는 숨겨져야 한다.
-        this.props.closeAllReplyForm(this.props.idx);
+        // this.props.closeAllReplyForm(this.props.idx);
+        //콜백으로 처리한다. 
+        callback(this.props.idx);
+        console.log("callback done");
 
         this.setState({
             writeformStyle : {
@@ -227,9 +230,15 @@ export default class Li extends Component{
             },
          
         })
+        console.log("writeformstyle set state done");
 
         this.showReplyList();
 
+    }
+
+    //부모로부터 받은 함수인 closeAllreplyform을 콜백으로 처리하기 위한...
+    closeAllReplyForm = (idx) => {
+        this.props.closeAllReplyForm(idx);
     }
 
     //댓글 작성창을 숨기게 하는 함수
@@ -399,7 +408,7 @@ export default class Li extends Component{
                                     <i className="fas fa-heart" style={{color:'orangered'}} onClick={this.unclickHeart}></i>
                                 </span>
                                 {/* 댓글쓰기 버튼 */}
-                                <span><i className="far fa-comment" onClick={this.showWriteForm}></i></span>
+                                <span><i className="far fa-comment" onClick={this.showWriteForm(this.closeAllReplyForm)}></i></span>
                                 {/* 수정, 삭제 버튼 */}
                                 <span style={this.state.moreBtnStyle} className="review_func_more" onClick={this.deleteData} ><i className="fas fa-times"></i></span>
                                 <div style={{clear: 'both'}}></div>

@@ -25,6 +25,9 @@ export default class Main extends Component{
             },
             hideStyle : {
                 display : 'none',
+            },
+            writeformStyle : {
+                display : 'none',
             }
         }
         this.list = this.list.bind(this);
@@ -276,7 +279,9 @@ export default class Main extends Component{
     closeAllReplyForm = (idx) => {
         //인자로 받은 idx가 누구인지 받아서 state에 저장한다.
         this.setState({
-            callChildIdx : idx,
+            writeformStyle : {
+                display: 'none',
+            }
         });
         console.log("close all reply form called by ", idx);
 
@@ -385,7 +390,7 @@ export default class Main extends Component{
                                 deleteReply = {this.deleteReply}
                                 // showText = {this.state.hideText}
                                 closeAllReplyForm = {this.closeAllReplyForm}
-                                writeformStyle = {this.state.showStyle}
+                                writeformStyle = {this.state.writeformStyle}
                                 list={this.list}></Li>
                             }else{ //만약 idx가 우리가 받은 idx와 다르다면...listStyle은 none
                                 return <Li idx={idx} row={row} key={idx} 
@@ -402,7 +407,7 @@ export default class Main extends Component{
                                 deleteReply = {this.deleteReply}
                                 // showText = {this.state.showText}
                                 closeAllReplyForm = {this.closeAllReplyForm}
-                                writeformStyle = {this.state.hideStyle}
+                                writeformStyle = {this.state.writeformStyle}
                                 list={this.list}></Li>
                             }
 
