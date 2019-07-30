@@ -104,25 +104,25 @@ export default class Li extends Component{
         })
     }
 
-    //when to click rating div : show detail of ratings 
+    //when to click rating div : show detail of ratings  -> css하기 힘들어서 일단 뺍니다 ㅠ 
     openDetailDiv = () => {
-        if(this.state.rateDetailStyle.display == 'none'){
-            this.setState({
-                rateDetailStyle : {
-                    display : 'block',  
-                    position: 'absolute',
-                    top: '30px',
-                    backgroundColor : 'white',
-                    zIndex: 10
-                }
-            })
-        }else{
-            this.setState({
-                rateDetailStyle : {
-                    display : 'none',  
-                }
-            })
-        }
+        // if(this.state.rateDetailStyle.display == 'none'){
+        //     this.setState({
+        //         rateDetailStyle : {
+        //             display : 'block',  
+        //             position: 'absolute',
+        //             top: '30px',
+        //             backgroundColor : 'white',
+        //             zIndex: 10
+        //         }
+        //     })
+        // }else{
+        //     this.setState({
+        //         rateDetailStyle : {
+        //             display : 'none',  
+        //         }
+        //     })
+        // }
         
     }
 
