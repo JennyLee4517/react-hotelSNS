@@ -435,7 +435,7 @@ export default class Li extends Component{
                             </div>
 
                             {/* 댓글 출력  */}
-                            <div className="review_reply_div div_last" id={startReplyPositionId}>
+                            <div className="review_reply_div reply_padding div_last" id={startReplyPositionId}>
                                 {/* <a href={"#"+startReplyPositionId}>test!!!</a> */}
                                 {/* <div onClick={this.toggleReplyList}>
                                     <span>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
