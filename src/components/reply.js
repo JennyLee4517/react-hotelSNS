@@ -26,7 +26,11 @@ export default class Main extends Component{
     }
 
     deleteReply = () => {
-        this.props.deleteReply(this.props.row.review_reply_num, this.props.idx, this.props.review_num);
+        let chk = window.confirm("정말 삭제하시겠습니까?");
+        if(chk){
+            this.props.deleteReply(this.props.row.review_reply_num, this.props.idx, this.props.review_num);
+        }
+        
     }
 
 
