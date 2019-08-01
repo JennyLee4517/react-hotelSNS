@@ -255,7 +255,11 @@ export default class Li extends Component{
 
     //게시물을 삭제하는 함수 
     deleteData = (review_num) => {
-        this.props.deleteData(this.props.row.review_num);
+        let chk = window.confirm("정말 삭제하시겠습니까?");
+        if(chk){
+            this.props.deleteData(this.props.row.review_num);
+        }
+        
     }
 
     //이미지 더블클릭 시 하트가 나타났다가 사라지게
