@@ -8,7 +8,7 @@ export default class Main extends Component{
 
         let deleteBtnStyle = "";
         //해당 댓글이 로그인한 회원의 댓글일 경우 삭제 버튼이 보여야 한다 
-        if(this.props.member_num == this.props.row.member_num){
+        if(this.props.member_num === this.props.row.member_num){
             deleteBtnStyle = 'inline';
         }else{
             deleteBtnStyle = 'none';
@@ -26,6 +26,7 @@ export default class Main extends Component{
       
     }
 
+    // 댓글 삭제 기능
     deleteReply = () => {
         let chk = window.confirm("정말 삭제하시겠습니까?");
         if(chk){
@@ -33,7 +34,6 @@ export default class Main extends Component{
         }
         
     }
-
 
     //render함수 
     render(){

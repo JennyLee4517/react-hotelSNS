@@ -10,7 +10,7 @@ export default class Li extends Component{
 
         //글 삭제 버튼이 보이기 위한 조건 : 현재 로그인 한 회원과 게시물을 작성한 회원이 일치 할 때 
         let moreBtnStyle = "";
-        if(this.props.member_num == this.props.row.member_num){
+        if(this.props.member_num === this.props.row.member_num){
             moreBtnStyle = 'inline';
         }else{
             moreBtnStyle = 'none';
@@ -51,8 +51,7 @@ export default class Li extends Component{
         };
 
         this.clickHeart = this.clickHeart.bind(this);
-        this.unclickHeart = this.unclickHeart.bind(this);
-        this.openDetailDiv = this.openDetailDiv.bind(this);
+        this.unclickHeart = this.unclickHeart.bind(this);    
         this.toggleReplyList = this.toggleReplyList.bind(this);
         this.changeShowOrHide = this.changeShowOrHide.bind(this);
         this.showWriteForm = this.showWriteForm.bind(this);
@@ -105,35 +104,13 @@ export default class Li extends Component{
         })
     }
 
-    //when to click rating div : show detail of ratings  -> css하기 힘들어서 일단 뺍니다 ㅠ 
-    openDetailDiv = () => {
-        // if(this.state.rateDetailStyle.display == 'none'){
-        //     this.setState({
-        //         rateDetailStyle : {
-        //             display : 'block',  
-        //             position: 'absolute',
-        //             top: '30px',
-        //             backgroundColor : 'white',
-        //             zIndex: 10
-        //         }
-        //     })
-        // }else{
-        //     this.setState({
-        //         rateDetailStyle : {
-        //             display : 'none',  
-        //         }
-        //     })
-        // }
-        
-    }
-
     //댓글 리스트를 열고 닫아주는 함수 
     toggleReplyList = () => {
 
         //아래 함수가 호출되면 댓글 토글 시 남의 댓글은 자동으로 닫힌다.
         // this.closeAllReplyList(this.props.idx);
         
-        if(this.state.showOrHide == "모두 보기"){
+        if(this.state.showOrHide === "모두 보기"){
             this.setState({
                 replyListStyle : {
                     display : 'block'
@@ -147,26 +124,6 @@ export default class Li extends Component{
                 }
             });
         }
-
-            //  //시작위치 잡을 id 
-            // let startReplyPositionId = "startReplyPosition" + this.props.row.review_num;
-            // console.log("check id ", startReplyPositionId);
-
-            // //시작위치 
-            // let startReplyPosition = document.getElementById(startReplyPositionId).offsetTop;
-
-            // //댓글 시작 위치 확인용
-            // console.log("start reply list position : " , startReplyPosition);
-
-            // //거기로 옮깁니다.
-            // window.scroll({
-            // top: startReplyPosition,
-            // left: 0,
-            // behavior: 'smooth'
-            // });
-
-        //스크롤을 해당 글의 댓글 리스트 최상단으로 옮겨주기
-        // this.props.moveToReplyListStart(this.props.idx, this.props.windowScroll);
         
         //모두 보기 <-> 모두 닫기 문구 변경 
         this.changeShowOrHide();
@@ -204,11 +161,11 @@ export default class Li extends Component{
 
     //모두 보기 모두 닫기 토글 함수 
     changeShowOrHide = () => {
-        if(this.state.showOrHide == "모두 보기"){
+        if(this.state.showOrHide === "모두 보기"){
             this.setState({
                 showOrHide : "모두 닫기"
             })
-        }else if(this.state.showOrHide == "모두 닫기"){
+        }else if(this.state.showOrHide === "모두 닫기"){
             this.setState({
                 showOrHide : "모두 보기"
             })
@@ -223,9 +180,6 @@ export default class Li extends Component{
                 display: 'block',
                 zIndex : 10,
             },
-            // autoFocus : {
-            //     autoFocus : 'true'
-            // } //이거 왜 안될까.... 슬프다..
         })
 
         this.showReplyList();
@@ -242,17 +196,9 @@ export default class Li extends Component{
     }
 
     //최신댓글 위치로 스크롤을 이동시키는 함수 
-    //혹시 이걸 부모로 옮겨야 하나...?
     scrollToLastReply = () => {
         this.props.scrollToLastReply(this.props.idx, this.props.windowScroll);
     }
-
-    // //자식(reply)로 부터 lastReplyPosition의 값을 받는 함수
-    // getLastReplyPosition = (e) => {
-    //     this.setState({
-    //         lastReplyPosition : 
-    //     })
-    // }
 
     //게시물을 삭제하는 함수 
     deleteData = (review_num) => {
@@ -266,7 +212,7 @@ export default class Li extends Component{
     //이미지 더블클릭 시 하트가 나타났다가 사라지게
     showHeart = () => {
         
-        if (this.state.touchtime == 0) {
+        if (this.state.touchtime === 0) {
             // set first click
             this.setState({
                 touchtime : new Date().getTime(),
@@ -300,7 +246,7 @@ export default class Li extends Component{
                 );
 
                 //좋아요 버튼 누른 효과
-                if(this.state.alreadyLiked!='yes'){
+                if(this.state.alreadyLiked!=='yes'){
                     this.clickHeart();
                 }
 
@@ -335,7 +281,7 @@ export default class Li extends Component{
         let showOrHideText = '';
 
         // 댓글이 없을 경우 아무 문구도 띄우지 않습니다.
-        if(this.props.row.review_reply_count == 0){
+        if(this.props.row.review_reply_count === 0){
             showOrHideText = '';
         }else{
             showOrHideText = this.state.showOrHide;
@@ -364,7 +310,7 @@ export default class Li extends Component{
                         </div>
 
                         {/* 별점 총점 이 출력(상세별점은 숨겨져 있음) */}
-                        <div className="review_rating_div" onClick={this.openDetailDiv}>
+                        <div className="review_rating_div" >
                                      <Rates rate={totalRate}></Rates>
                                 <div style={{clear:'both'}}></div>
                                 
@@ -442,15 +388,11 @@ export default class Li extends Component{
 
                             {/* 댓글 출력  */}
                             <div className="review_reply_div reply_padding div_last" id={startReplyPositionId}>
-                                {/* <a href={"#"+startReplyPositionId}>test!!!</a> */}
-                                {/* <div onClick={this.toggleReplyList}>
-                                    <span>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
-                                </div> */}
+
                                 <div >
                                     <span className="a_reply" onClick={this.toggleReplyList}>댓글 {this.props.row.review_reply_count} 개 {showOrHideText}</span>
                                 </div>
 
-                                {/* <div style={this.props.listStyle} ref={replyListId}> */}
                                     <div className="review_reply_list_div" style={this.state.replyListStyle}>
                                         {
                                             this.props.row.reply_list.map( (row,idx) => 
@@ -464,22 +406,9 @@ export default class Li extends Component{
                                                 <div style={{clear:'both'}}></div></div>)
                                             )
                                         }
-                                        
-                                        {/* 댓글 목록 내부에 위치한 댓글 작성창 : 그냥 없애자... */}
-                                        {/* <div className="review_reply_writeform_div_inList" >
-                                        <ReplyForm member_num={this.props.member_num}
-                                        review_num={this.props.row.review_num}
-                                        insertReply={this.props.insertReply}
-                                        idx = {this.props.idx} 
-                                        showReplyList={this.showReplyList}
-                                        //    autoFocus = {this.state.autoFocus}
-                                        hideWriteForm = {this.hideWriteForm}
-                                        scrollToLastReply = {this.scrollToLastReply}
-                                        ></ReplyForm>   
-                                        </div> */}
 
                                     </div>
-                                {/* </div> */}
+                                
                                 <div id={lastReplyPositionId}></div>
                             </div>
 

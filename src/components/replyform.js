@@ -82,7 +82,7 @@ export default class ReplyForm extends Component{
             })
         }
 
-        if(e.key == 'Enter'){
+        if(e.key === 'Enter'){
             this.insertReply();
         }
     }
@@ -108,9 +108,6 @@ export default class ReplyForm extends Component{
 
         //부모(li.js)에서 관리하는 writeformStyle의 display를 none으로 변경시켜야 한다.
         this.props.hideWriteForm();
-
-        //스크롤 위치를 최신 댓글 위치로 변경 시켜봅시다.(부모가 가진 함수에요)
-        // this.props.scrollToLastReply();
         
     }
 
@@ -127,9 +124,6 @@ export default class ReplyForm extends Component{
         .catch(err => {
             console.error(err); 
         })
-
-
-
     }
     
 
@@ -139,7 +133,7 @@ export default class ReplyForm extends Component{
         let placeholder = this.state.mbdto.id + "님으로 댓글 달기...";
         let loginURL  = this.state.root + "login.do?url=reviewlist.do";
 
-        if(this.props.member_num == 0){
+        if(this.props.member_num === 0){
             return(
                 <div className="writeform_div">
                     <a href={loginURL}>
