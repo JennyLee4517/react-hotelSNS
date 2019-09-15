@@ -45,6 +45,7 @@ export default class Li extends Component{
                 opacity: 0,
             },
             alreadyLiked : 'no',
+            root : this.props.root,
 
 
         };
@@ -317,9 +318,9 @@ export default class Li extends Component{
     render(){
 
         //복잡한 스트링 처리는 미리 해주도록 합니다.
-        let review_img = "http://15.164.144.128:8080/HotelProject/save/review/" + this.props.row.review_img;
-        let member_pic = "http://15.164.144.128:8080/HotelProject/save/member_pic/" + this.props.row.member_pic;
-        let heart = "http://15.164.144.128:8080/HotelProject/save/images/heart.png";
+        let review_img = this.state.root + "save/review/" + this.props.row.review_img;
+        let member_pic = this.state.root + "save/member_pic/" + this.props.row.member_pic;
+        let heart = this.state.root + "save/images/heart.png";
 
         let startReplyPositionId = "startReplyPosition" + this.props.idx;
         // let replyListId = "replyList" + this.props.row.review_num;
@@ -419,6 +420,7 @@ export default class Li extends Component{
                                         //    autoFocus = {this.state.autoFocus}
                                         hideWriteForm = {this.hideWriteForm}
                                         scrollToLastReply = {this.scrollToLastReply}
+                                        root = {this.props.root}
                                         ></ReplyForm>   
                             </div>
 
@@ -457,6 +459,7 @@ export default class Li extends Component{
                                                     review_num={this.props.row.review_num}
                                                     member_num={this.state.member_num}
                                                     deleteReply = {this.props.deleteReply}
+                                                    root = {this.props.root}
                                                     ></Reply>
                                                 <div style={{clear:'both'}}></div></div>)
                                             )

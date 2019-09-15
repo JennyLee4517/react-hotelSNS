@@ -20,6 +20,7 @@ export default class Main extends Component{
             // hideText: "모두 닫기",
             callChildIdx : null,
             currentPage : 1,
+            root : this.props.root,
         }
         this.list = this.list.bind(this);
         this.updateLike = this.updateLike.bind(this);
@@ -42,7 +43,7 @@ export default class Main extends Component{
     //list 를 가져올 함수
     list = (currentPage) => {
 
-        var url="http://15.164.144.128:8080/HotelProject/reviewList?currentPage=" + currentPage;
+        var url= this.state.root + "reviewList?currentPage=" + currentPage;
 
         axios.get(url)
         .then(res => {
@@ -88,7 +89,7 @@ export default class Main extends Component{
     //댓글 인서트 메서드
     insertReply = (data, idx) => {
 
-        var url = "http://15.164.144.128:8080/HotelProject/reviewReplyAdd?review_num=" + data.review_num.value +"&member_num=" + data.member_num.value + "&review_reply_comment=" + data.review_reply_comment.value;
+        var url = this.state.root + "reviewReplyAdd?review_num=" + data.review_num.value +"&member_num=" + data.member_num.value + "&review_reply_comment=" + data.review_reply_comment.value;
 
         axios.get(url)
         .then(res => {
@@ -133,7 +134,7 @@ export default class Main extends Component{
     //댓글 삭제하는 함수
     deleteReply = (review_reply_num, idx, review_num) => {
 
-        var url="http://15.164.144.128:8080/HotelProject/reviewReplyDelete?review_reply_num=" + review_reply_num + "&review_num=" + review_num;
+        var url= this.state.root + "reviewReplyDelete?review_reply_num=" + review_reply_num + "&review_num=" + review_num;
 
         axios.get(url)
         .then(res => {
@@ -170,7 +171,7 @@ export default class Main extends Component{
     //update like when heart button is clicked
     updateLike = (idx, review_num) => {
 
-        var url="http://15.164.144.128:8080/HotelProject/reviewUpdateLike?review_num=" + review_num;
+        var url= this.state.root + "reviewUpdateLike?review_num=" + review_num;
 
         axios.get(url)
         .then(res => {
@@ -203,7 +204,7 @@ export default class Main extends Component{
 
     updateUnlike = (idx, review_num) => {
 
-        var url="http://15.164.144.128:8080/HotelProject/reviewUpdateUnlike?review_num=" + review_num;
+        var url=this.state.root + "reviewUpdateUnlike?review_num=" + review_num;
 
         axios.get(url)
         .then(res => {
@@ -237,7 +238,7 @@ export default class Main extends Component{
     //게시물 삭제하는 함수 
     deleteData = (review_num) => {
 
-        var url="http://15.164.144.128:8080/HotelProject/reviewDelete?review_num=" + review_num;
+        var url= this.state.root + "reviewDelete?review_num=" + review_num;
 
         axios.delete(url)
         .then(res => {
@@ -358,6 +359,7 @@ export default class Main extends Component{
                                 scrollToLastReply = {this.scrollToLastReply}
                                 deleteData = {this.deleteData}
                                 deleteReply = {this.deleteReply}
+                                root = {this.state.root}
                                 // showText = {this.state.hideText}
                                 list={this.list}></Li>
                             }else{ //만약 idx가 우리가 받은 idx와 다르다면...listStyle은 none
@@ -373,6 +375,7 @@ export default class Main extends Component{
                                 scrollToLastReply = {this.scrollToLastReply}
                                 deleteData = {this.deleteData}
                                 deleteReply = {this.deleteReply}
+                                root = {this.state.root}
                                 // showText = {this.state.showText}
                                 list={this.list}></Li>
                             }

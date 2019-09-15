@@ -18,7 +18,8 @@ export default class Main extends Component{
             //state 초기화 
             deleteBtnStyle : {
                 display : deleteBtnStyle,
-            }
+            },
+            root : this.props.root,
         }
 
         this.deleteReply = this.deleteReply.bind(this);
@@ -36,7 +37,7 @@ export default class Main extends Component{
 
     //render함수 
     render(){
-        let member_pic = "http://15.164.144.128:8080/HotelProject/save/member_pic/" + this.props.row.member_pic;
+        let member_pic = this.state.root + "save/member_pic/" + this.props.row.member_pic;
         return(
             <div>
                  <div className="review_reply_list_div">

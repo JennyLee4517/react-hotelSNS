@@ -25,7 +25,8 @@ export default class ReplyForm extends Component{
                 paddingLeft: '10px',
                 fontSize: '1em',
                 marginTop: '-3px',
-            }
+            },
+            root : this.props.root,
         }
 
      
@@ -42,7 +43,7 @@ export default class ReplyForm extends Component{
 
     //서버로부터 db데이타를 받아옴 
     getMemberData = (member_num) => {
-        var url="http://15.164.144.128:8080/HotelProject/reviewGetMember?member_num=" + member_num;
+        var url= this.state.root + "reviewGetMember?member_num=" + member_num;
 
         axios.get(url)
         .then(res => {
@@ -115,7 +116,7 @@ export default class ReplyForm extends Component{
 
     goLoginPage = () => {
         console.log('goLoginPage');
-        var url="http://15.164.144.128:8080/HotelProject/reactLogin";
+        var url= this.state.root + "reactLogin";
 
         axios.get(url)
         .then(res => {
@@ -134,13 +135,14 @@ export default class ReplyForm extends Component{
 
     render(){
 
-        let user_pic = "http://15.164.144.128:8080/HotelProject/save/member_pic/" + this.state.mbdto.member_pic;
+        let user_pic = this.state.root + "save/member_pic/" + this.state.mbdto.member_pic;
         let placeholder = this.state.mbdto.id + "님으로 댓글 달기...";
+        let loginURL  = this.state.root + "login.do?url=reviewlist.do";
 
         if(this.props.member_num == 0){
             return(
                 <div className="writeform_div">
-                    <a href="http://15.164.144.128:8080/HotelProject/login.do?url=reviewlist.do">
+                    <a href={loginURL}>
                         <div className="writeform_nologin" >
                         댓글을 작성하시려면 먼저 <span>로그인</span>을 해주세요.
                         {/* 로그인 창으로 유도 및 url 값 넘겨주기!!  */}
